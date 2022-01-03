@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{Fragment} from 'react'
 
-function App() {
+import Routers from './Routes/index'
+/// Style
+import "./vendor/bootstrap-select/dist/css/bootstrap-select.min.css";
+import "./css/style.css";
+
+import { withResizeDetector } from "react-resize-detector";
+
+ const App = ({ width }) => {
+  const body = document.querySelector("body");
+  body.setAttribute("data-typography", "poppins");
+  body.setAttribute("data-theme-version", "light");
+  body.setAttribute("data-layout", "vertical");
+  body.setAttribute("data-nav-headerbg", "color_1");
+  body.setAttribute("data-headerbg", "color_1");
+  body.setAttribute("data-sidebar-style", "compact");
+  body.setAttribute("data-sibebarbg", "color_1");
+  body.setAttribute("data-primary", "color_1");
+  body.setAttribute("data-sidebar-position", "fixed");
+  body.setAttribute("data-header-position", "fixed");
+  body.setAttribute("data-container", "wide");
+  body.setAttribute("direction", "ltr");
+
+  width >= 768 && width < 1300
+    ? body.setAttribute("data-sidebar-style", "mini")
+    : width <= 768
+    ? body.setAttribute("data-sidebar-style", "overlay")
+    : body.setAttribute("data-sidebar-style", "full");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Routers />
+    </Fragment>
   );
 }
 
-export default App;
+export default withResizeDetector(App);
